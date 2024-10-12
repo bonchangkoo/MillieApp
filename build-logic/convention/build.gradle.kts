@@ -49,6 +49,10 @@ gradlePlugin {
             id = "millieapp.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidFeature") {
+            id = "millieapp.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
         register("hilt") {
             id = "millieapp.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"

@@ -32,6 +32,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
@@ -60,6 +61,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Plugins defined by this project
 millieapp-android-application = { id = "millieapp.android.application", version = "unspecified" }
 millieapp-android-application-compose = { id = "millieapp.android.application.compose", version = "unspecified" }
+millieapp-android-feature = { id = "millieapp.android.feature", version = "unspecified" }
 millieapp-android-hilt = { id = "millieapp.android.hilt", version = "unspecified" }
 millieapp-android-library = { id = "millieapp.android.library", version = "unspecified" }
 millieapp-android-library-compose = { id = "millieapp.android.library.compose", version = "unspecified" }
