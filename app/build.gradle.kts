@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.coil.kt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
