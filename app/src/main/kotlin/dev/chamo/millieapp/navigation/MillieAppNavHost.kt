@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import dev.chamo.millieapp.feature.news.navigation.NEWS_ROUTE
+import dev.chamo.millieapp.feature.news.navigation.newsScreen
 
 @Composable
 fun MillieAppNavHost(
@@ -12,9 +14,9 @@ fun MillieAppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "", // todo: startDestination
+        startDestination = NEWS_ROUTE,
         modifier = modifier
     ) {
-
+        newsScreen()
     }
 }
