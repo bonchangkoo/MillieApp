@@ -49,7 +49,6 @@ fun WebViewScreen(url: String) {
                         isLoading.value = false
                     }
                 }
-                setLayerType(View.LAYER_TYPE_HARDWARE, null)
                 with(settings) {
                     javaScriptEnabled = true
                     cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
