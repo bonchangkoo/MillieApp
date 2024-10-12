@@ -10,6 +10,7 @@ android {
 
 
 dependencies {
-    api(project(":core:common"))
-    api(project(":core:network"))
+    implementation(project(":core:common"))
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
 }
