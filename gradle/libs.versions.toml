@@ -17,7 +17,7 @@ jetbrainsKotlinJvm = "2.0.20"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.20"
-kotlinxCoroutines = "1.9.0-RC"
+kotlinxCoroutines = "1.9.0"
 kotlinxDatetime = "0.6.0"
 kotlinxSerializationJson = "1.7.0"
 ksp = "2.0.20-1.0.24"
@@ -25,6 +25,7 @@ material = "1.12.0"
 okhttp = "4.12.0"
 retrofit = "2.11.0"
 retrofitKotlinxSerializationJson = "1.0.0"
+room = "2.6.1"
 secrets = "2.0.1"
 
 [libraries]
@@ -59,6 +60,9 @@ material = { group = "com.google.android.material", name = "material", version.r
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
@@ -84,4 +88,5 @@ millieapp-android-feature = { id = "millieapp.android.feature", version = "unspe
 millieapp-android-hilt = { id = "millieapp.android.hilt", version = "unspecified" }
 millieapp-android-library = { id = "millieapp.android.library", version = "unspecified" }
 millieapp-android-library-compose = { id = "millieapp.android.library.compose", version = "unspecified" }
+millieapp-android-room = { id = "millieapp.android.room", version = "unspecified" }
 millieapp-jvm-library = { id = "millieapp.jvm.library", version = "unspecified" }
