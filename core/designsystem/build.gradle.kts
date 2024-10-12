@@ -15,4 +15,5 @@ dependencies {
     api(libs.androidx.compose.ui.tooling.preview)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.coil.kt.compose)
 }
