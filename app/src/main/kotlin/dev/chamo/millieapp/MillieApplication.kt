@@ -20,7 +20,7 @@ class MillieApplication : Application(), ImageLoaderFactory {
             .diskCache {
                 DiskCache.Builder()
                     .directory(cacheDir.resolve("image_cache"))
-                    .maxSizeBytes(2 * 1024 * 1024)
+                    .maxSizeBytes(50 * 1024 * 1024)
                     .build()
             }
             .logger(DebugLogger())
