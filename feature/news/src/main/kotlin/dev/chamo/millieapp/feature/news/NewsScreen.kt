@@ -13,13 +13,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -42,7 +39,7 @@ import coil.compose.AsyncImage
 import dev.chamo.millieapp.core.designsystem.component.MillieAppLoadingView
 import dev.chamo.millieapp.core.designsystem.component.MillieAppTopAppBar
 import dev.chamo.millieapp.core.designsystem.icon.MillieAppIcons
-import dev.chamo.millieapp.core.model.TopHeadLine
+import dev.chamo.millieapp.core.model.TopHeadline
 
 @Composable
 internal fun NewsRoute(
@@ -122,7 +119,7 @@ internal fun NewsScreen(
 
 @Composable
 internal fun TopHeadLineItem(
-    topHeadLine: TopHeadLine,
+    topHeadLine: TopHeadline,
     onNewsClick: (String) -> Unit,
 ) {
     Column(
@@ -227,14 +224,13 @@ internal fun ErrorNewsResultBody() {
     }
 }
 
-
 @Preview
 @Composable
 private fun NewsScreenPreview() {
     NewsScreen(
         topHeadLinesUiState = TopHeadLinesUiState.Success(
             listOf(
-                TopHeadLine(
+                TopHeadline(
                     sourceName = "New York Post",
                     author = "Whitney Vasquez",
                     title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
@@ -257,7 +253,7 @@ private fun NewsScreenTabletPreview() {
     NewsScreen(
         topHeadLinesUiState = TopHeadLinesUiState.Success(
             listOf(
-                TopHeadLine(
+                TopHeadline(
                     sourceName = "New York Post",
                     author = "Whitney Vasquez",
                     title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
@@ -267,7 +263,7 @@ private fun NewsScreenTabletPreview() {
                     publishedAt = "1시간 전",
                     content = ""
                 ),
-                TopHeadLine(
+                TopHeadline(
                     sourceName = "The New Republic",
                     author = "Edith Olmsted",
                     title = "TikTok Is Dangerously Addictive—and Its Executives Knew All Along - Yahoo! Voices",
@@ -277,7 +273,7 @@ private fun NewsScreenTabletPreview() {
                     publishedAt = "7시간 전",
                     content = ""
                 ),
-                TopHeadLine(
+                TopHeadline(
                     sourceName = "Associated Press",
                     author = "JESSE BEDAYN, MATTHEW BROWN",
                     title = "An elevator mishap at a Colorado tourist mine killed 1 and trapped 12. The cause is still unknown - The Associated Press",

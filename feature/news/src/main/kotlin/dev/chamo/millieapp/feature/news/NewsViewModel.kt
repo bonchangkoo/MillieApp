@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.chamo.millieapp.core.common.result.Result
 import dev.chamo.millieapp.core.common.result.asResult
 import dev.chamo.millieapp.core.data.repository.NewsRepository
-import dev.chamo.millieapp.core.model.TopHeadLine
+import dev.chamo.millieapp.core.model.TopHeadline
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -27,6 +27,26 @@ class NewsViewModel @Inject constructor(
     private fun loadTopHeadlines() {
         viewModelScope.launch {
             newsRepository.getTopHeadlines()
+                .asResult()
+                .collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            _topHeadLinesUiState.value = TopHeadLinesUiState.Success(result.data)
+                        }
+                        is Result.Error -> {
+                            loadTopHeadLinesFromDatabase()
+                        }
+                        is Result.Loading -> {
+                            _topHeadLinesUiState.value = TopHeadLinesUiState.Loading
+                        }
+                    }
+                }
+        }
+    }
+
+    private fun loadTopHeadLinesFromDatabase() {
+        viewModelScope.launch {
+            newsRepository.getTopHeadlines(isOffline = true)
                 .asResult()
                 .collect { result ->
                     when (result) {
@@ -66,7 +86,7 @@ sealed interface TopHeadLinesUiState {
     data object Error: TopHeadLinesUiState
 
     data class Success(
-        val topHeadlines: List<TopHeadLine>
+        val topHeadlines: List<TopHeadline>
     ): TopHeadLinesUiState {
         fun isEmpty(): Boolean = topHeadlines.isEmpty()
     }

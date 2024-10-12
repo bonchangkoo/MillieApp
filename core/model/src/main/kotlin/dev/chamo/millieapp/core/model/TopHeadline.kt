@@ -1,6 +1,6 @@
 package dev.chamo.millieapp.core.model
 
-data class TopHeadLine(
+data class TopHeadline(
     val sourceName: String,
     val author: String,
     val title: String,
