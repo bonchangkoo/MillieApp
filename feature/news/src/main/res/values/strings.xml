@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_news_top_headlines">주요 헤드라인</string>
+    <string name="feature_news_no_top_headlines">주요 헤드라인이 없습니다.</string>
+    <string name="feature_news_error_occurred">문제가 발생했습니다.\n다시 시도해 주세요.</string>
+    <string name="feature_news_dot">·</string>
+</resources>

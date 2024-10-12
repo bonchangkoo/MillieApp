@@ -8,5 +8,6 @@ data class TopHeadLine(
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
-    val content: String
+    val content: String,
+    val isSelected: Boolean = false
 )
