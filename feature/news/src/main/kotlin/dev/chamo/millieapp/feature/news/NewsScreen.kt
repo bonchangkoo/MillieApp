@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -89,10 +95,14 @@ internal fun NewsScreen(
                     EmptyNewsResultBody()
 
                 } else {
-                    val scrollableState = rememberLazyListState()
-                    LazyColumn(
+                    val scrollableState = rememberLazyGridState()
+                    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+                    val columns = if (screenWidth >= 600.dp) 3 else 1
+
+                    LazyVerticalGrid(
                         modifier = Modifier
                             .fillMaxSize(),
+                        columns = GridCells.Fixed(columns),
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         state = scrollableState
@@ -163,7 +173,7 @@ internal fun TopHeadLineItem(
                         .weight(1f),
                     text = topHeadLine.description,
                     style = MaterialTheme.typography.bodyLarge,
-                    maxLines = 4,
+                    maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                 )
 
@@ -225,13 +235,56 @@ private fun NewsScreenPreview() {
         topHeadLinesUiState = TopHeadLinesUiState.Success(
             listOf(
                 TopHeadLine(
-                    sourceName = "연합뉴스",
-                    author = "홍길동",
-                    title = "휠체어 타고 장난감 총 들고 강도짓 벌인 2인조 체포",
-                    description = "휠체어를 타고 강도 행각을 벌인 아르헨티나 청년이 공범과 함께 경찰에 붙잡혔다. 범행에 사용한 권총은 장난감 총이었다.",
+                    sourceName = "New York Post",
+                    author = "Whitney Vasquez",
+                    title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
+                    description = "Mike Tyson had some interesting words for his longtime pal Diddy.",
                     url = "",
-                    urlToImage = "urlToImage",
-                    publishedAt = "",
+                    urlToImage = "https://nypost.com/wp-content/uploads/sites/2/2024/10/i-wish-best-91446631.jpg?quality=75&strip=all&w=1024",
+                    publishedAt = "2024-10-11T17:57:00Z",
+                    content = ""
+                )
+            )
+        ),
+        onNewsClick = {},
+        onNavigationClick = {}
+    )
+}
+
+@Preview(device = Devices.TABLET)
+@Composable
+private fun NewsScreenTabletPreview() {
+    NewsScreen(
+        topHeadLinesUiState = TopHeadLinesUiState.Success(
+            listOf(
+                TopHeadLine(
+                    sourceName = "New York Post",
+                    author = "Whitney Vasquez",
+                    title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
+                    description = "Mike Tyson had some interesting words for his longtime pal Diddy.",
+                    url = "",
+                    urlToImage = "https://nypost.com/wp-content/uploads/sites/2/2024/10/i-wish-best-91446631.jpg?quality=75&strip=all&w=1024",
+                    publishedAt = "1시간 전",
+                    content = ""
+                ),
+                TopHeadLine(
+                    sourceName = "The New Republic",
+                    author = "Edith Olmsted",
+                    title = "TikTok Is Dangerously Addictive—and Its Executives Knew All Along - Yahoo! Voices",
+                    description = "It’s easy for children and teenagers to get hooked on TikTok, and the company higher-ups aren’t doing anything about it.",
+                    url = "",
+                    urlToImage = "https://images.newrepublic.com/a04a596b419fac95af7c8a8dd628184043ec991e.jpeg?w=1200&h=630&crop=faces&fit=crop&fm=jpg",
+                    publishedAt = "7시간 전",
+                    content = ""
+                ),
+                TopHeadLine(
+                    sourceName = "Associated Press",
+                    author = "JESSE BEDAYN, MATTHEW BROWN",
+                    title = "An elevator mishap at a Colorado tourist mine killed 1 and trapped 12. The cause is still unknown - The Associated Press",
+                    description = "Investigators were trying to figure out Friday what led an elevator to malfunction at a former Colorado gold mine, killing one person. Four others were injured and 12 people were trapped for hours at the bottom of the tourist attraction 1,000 feet (305 meters…",
+                    url = "",
+                    urlToImage = "https://dims.apnews.com/dims4/default/8d74bef/2147483647/strip/true/crop/4565x2568+0+399/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F24%2F27%2Fdaa2cc3682d6380718cea0efa01d%2F40a86f2b3af0460ea40b54b878a91c2d",
+                    publishedAt = "2일 전",
                     content = ""
                 )
             )
