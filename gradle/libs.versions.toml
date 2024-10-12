@@ -63,4 +63,4 @@ millieapp-android-application-compose = { id = "millieapp.android.application.co
 millieapp-android-hilt = { id = "millieapp.android.hilt", version = "unspecified" }
 millieapp-android-library = { id = "millieapp.android.library", version = "unspecified" }
 millieapp-android-library-compose = { id = "millieapp.android.library.compose", version = "unspecified" }
-millieapp-jvm-library = { id = "mycletest.jvm.library", version = "unspecified" }
+millieapp-jvm-library = { id = "millieapp.jvm.library", version = "unspecified" }
