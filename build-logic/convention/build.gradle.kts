@@ -61,5 +61,9 @@ gradlePlugin {
             id = "millieapp.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("androidRoom") {
+            id = "millieapp.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
     }
 }
