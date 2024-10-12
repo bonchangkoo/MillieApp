@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.chamo.millieapp.core.network.MillieAppNetworkDataSource
+import dev.chamo.millieapp.core.network.retrofit.RetrofitMillieAppNetwork
 import dev.chamo.mycletest.core.network.BuildConfig
 import kotlinx.serialization.json.Json
 import okhttp3.Call
@@ -32,4 +34,16 @@ object NetworkModule {
                 },
         )
         .build()
+
+    @Provides
+    @Singleton
+    fun providesMillieAppNetworkDataSource(
+        networkJson: Json,
+        okhttpCallFactory: Call.Factory
+    ): MillieAppNetworkDataSource {
+        return RetrofitMillieAppNetwork(
+            networkJson = networkJson,
+            okhttpCallFactory = okhttpCallFactory
+        )
+    }
 }
