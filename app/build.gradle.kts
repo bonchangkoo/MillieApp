@@ -26,6 +26,7 @@ android {
 
 dependencies {
     implementation(project(":feature:news"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
