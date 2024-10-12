@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class NetworkTopHeadlines(
     val articles: List<NetworkArticle>,
     val status: String,
-    val totalResult: Int
+    val totalResults: Int
 )
