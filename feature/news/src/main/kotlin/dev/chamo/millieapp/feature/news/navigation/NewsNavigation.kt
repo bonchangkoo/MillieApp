@@ -6,8 +6,14 @@ import dev.chamo.millieapp.feature.news.NewsRoute
 
 const val NEWS_ROUTE = "news_route"
 
-fun NavGraphBuilder.newsScreen() {
+fun NavGraphBuilder.newsScreen(
+    onNewsClick: (String) -> Unit,
+    onBackClick: () -> Unit,
+) {
     composable(route = NEWS_ROUTE) {
-        NewsRoute()
+        NewsRoute(
+            onNewsClick = onNewsClick,
+            onBackClick = onBackClick
+        )
     }
 }
