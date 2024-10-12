@@ -23,3 +23,5 @@ dependencyResolutionManagement {
 rootProject.name = "MillieApp"
 include(":app")
 include(":feature:news")
+include(":core:model")
+include(":core:network")
