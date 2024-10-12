@@ -49,7 +49,7 @@ class NewsViewModel @Inject constructor(
         if (currentState is TopHeadLinesUiState.Success) {
             val newTopHeadlines = currentState.topHeadlines.map { topHeadLine ->
                 if (topHeadLine.url == url) {
-                    topHeadLine.copy(isSelected = !topHeadLine.isSelected)
+                    topHeadLine.copy(isSelected = true)
                 } else {
                     topHeadLine
                 }
