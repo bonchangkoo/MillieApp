@@ -1,5 +1,6 @@
 package dev.chamo.millieapp.feature.news
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +41,7 @@ import coil.compose.AsyncImage
 import dev.chamo.millieapp.core.designsystem.component.MillieAppLoadingView
 import dev.chamo.millieapp.core.designsystem.component.MillieAppTopAppBar
 import dev.chamo.millieapp.core.designsystem.icon.MillieAppIcons
+import dev.chamo.millieapp.core.designsystem.theme.MillieAppTheme
 import dev.chamo.millieapp.core.model.TopHeadline
 
 @Composable
@@ -102,6 +105,7 @@ internal fun NewsScreen(
                         columns = GridCells.Fixed(columns),
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
                         state = scrollableState
                     ) {
                         items(topHeadLinesUiState.topHeadlines) {
@@ -133,7 +137,8 @@ internal fun TopHeadLineItem(
         ) {
             Text(
                 text = topHeadLine.sourceName,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(
                 modifier = Modifier
@@ -143,7 +148,8 @@ internal fun TopHeadLineItem(
             )
             Text(
                 text = topHeadLine.publishedAt,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
 
@@ -170,6 +176,7 @@ internal fun TopHeadLineItem(
                         .weight(1f),
                     text = topHeadLine.description,
                     style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -203,6 +210,7 @@ internal fun EmptyNewsResultBody() {
         Text(
             text = stringResource(R.string.feature_news_no_top_headlines),
             style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
@@ -215,100 +223,83 @@ internal fun ErrorNewsResultBody() {
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            modifier = Modifier.align(
-                alignment = Alignment.Center
-            ),
             text = stringResource(R.string.feature_news_error_occurred),
+            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
 
-@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme", showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
+@Preview(device = Devices.TABLET, showBackground = true)
 @Composable
 private fun NewsScreenPreview() {
-    NewsScreen(
-        topHeadLinesUiState = TopHeadLinesUiState.Success(
-            listOf(
-                TopHeadline(
-                    sourceName = "New York Post",
-                    author = "Whitney Vasquez",
-                    title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
-                    description = "Mike Tyson had some interesting words for his longtime pal Diddy.",
-                    url = "",
-                    urlToImage = "https://nypost.com/wp-content/uploads/sites/2/2024/10/i-wish-best-91446631.jpg?quality=75&strip=all&w=1024",
-                    publishedAt = "2024-10-11T17:57:00Z",
-                    content = ""
+    MillieAppTheme {
+        NewsScreen(
+            topHeadLinesUiState = TopHeadLinesUiState.Success(
+                listOf(
+                    TopHeadline(
+                        sourceName = "New York Post",
+                        author = "Whitney Vasquez",
+                        title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
+                        description = "Mike Tyson had some interesting words for his longtime pal Diddy.",
+                        url = "",
+                        urlToImage = "https://nypost.com/wp-content/uploads/sites/2/2024/10/i-wish-best-91446631.jpg?quality=75&strip=all&w=1024",
+                        publishedAt = "1시간 전",
+                        content = ""
+                    ),
+                    TopHeadline(
+                        sourceName = "The New Republic",
+                        author = "Edith Olmsted",
+                        title = "TikTok Is Dangerously Addictive—and Its Executives Knew All Along - Yahoo! Voices",
+                        description = "It’s easy for children and teenagers to get hooked on TikTok, and the company higher-ups aren’t doing anything about it.",
+                        url = "",
+                        urlToImage = "https://images.newrepublic.com/a04a596b419fac95af7c8a8dd628184043ec991e.jpeg?w=1200&h=630&crop=faces&fit=crop&fm=jpg",
+                        publishedAt = "7시간 전",
+                        content = ""
+                    ),
+                    TopHeadline(
+                        sourceName = "Associated Press",
+                        author = "JESSE BEDAYN, MATTHEW BROWN",
+                        title = "An elevator mishap at a Colorado tourist mine killed 1 and trapped 12. The cause is still unknown - The Associated Press",
+                        description = "Investigators were trying to figure out Friday what led an elevator to malfunction at a former Colorado gold mine, killing one person. Four others were injured and 12 people were trapped for hours at the bottom of the tourist attraction 1,000 feet (305 meters…",
+                        url = "",
+                        urlToImage = "https://dims.apnews.com/dims4/default/8d74bef/2147483647/strip/true/crop/4565x2568+0+399/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F24%2F27%2Fdaa2cc3682d6380718cea0efa01d%2F40a86f2b3af0460ea40b54b878a91c2d",
+                        publishedAt = "2일 전",
+                        content = ""
+                    )
                 )
-            )
-        ),
-        onNewsClick = {},
-        onNavigationClick = {}
-    )
+            ),
+            onNewsClick = {},
+            onNavigationClick = {}
+        )
+    }
 }
 
-@Preview(device = Devices.TABLET)
-@Composable
-private fun NewsScreenTabletPreview() {
-    NewsScreen(
-        topHeadLinesUiState = TopHeadLinesUiState.Success(
-            listOf(
-                TopHeadline(
-                    sourceName = "New York Post",
-                    author = "Whitney Vasquez",
-                    title = "Mike Tyson issues bizarre message to Diddy amid sex-trafficking scandal: ‘I wish him all the best’ - New York Post",
-                    description = "Mike Tyson had some interesting words for his longtime pal Diddy.",
-                    url = "",
-                    urlToImage = "https://nypost.com/wp-content/uploads/sites/2/2024/10/i-wish-best-91446631.jpg?quality=75&strip=all&w=1024",
-                    publishedAt = "1시간 전",
-                    content = ""
-                ),
-                TopHeadline(
-                    sourceName = "The New Republic",
-                    author = "Edith Olmsted",
-                    title = "TikTok Is Dangerously Addictive—and Its Executives Knew All Along - Yahoo! Voices",
-                    description = "It’s easy for children and teenagers to get hooked on TikTok, and the company higher-ups aren’t doing anything about it.",
-                    url = "",
-                    urlToImage = "https://images.newrepublic.com/a04a596b419fac95af7c8a8dd628184043ec991e.jpeg?w=1200&h=630&crop=faces&fit=crop&fm=jpg",
-                    publishedAt = "7시간 전",
-                    content = ""
-                ),
-                TopHeadline(
-                    sourceName = "Associated Press",
-                    author = "JESSE BEDAYN, MATTHEW BROWN",
-                    title = "An elevator mishap at a Colorado tourist mine killed 1 and trapped 12. The cause is still unknown - The Associated Press",
-                    description = "Investigators were trying to figure out Friday what led an elevator to malfunction at a former Colorado gold mine, killing one person. Four others were injured and 12 people were trapped for hours at the bottom of the tourist attraction 1,000 feet (305 meters…",
-                    url = "",
-                    urlToImage = "https://dims.apnews.com/dims4/default/8d74bef/2147483647/strip/true/crop/4565x2568+0+399/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F24%2F27%2Fdaa2cc3682d6380718cea0efa01d%2F40a86f2b3af0460ea40b54b878a91c2d",
-                    publishedAt = "2일 전",
-                    content = ""
-                )
-            )
-        ),
-        onNewsClick = {},
-        onNavigationClick = {}
-    )
-}
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun NewsScreenPreviewNoNews() {
-    NewsScreen(
-        topHeadLinesUiState = TopHeadLinesUiState.Success(
-            emptyList()
-        ),
-        onNewsClick = {},
-        onNavigationClick = {}
-    )
+    MillieAppTheme {
+        NewsScreen(
+            topHeadLinesUiState = TopHeadLinesUiState.Success(
+                emptyList()
+            ),
+            onNewsClick = {},
+            onNavigationClick = {}
+        )
+    }
 }
 
-
-@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
 @Composable
 private fun NewsScreenPreviewErrorOccurred() {
-    NewsScreen(
-        topHeadLinesUiState = TopHeadLinesUiState.Error,
-        onNewsClick = {},
-        onNavigationClick = {}
-    )
+    MillieAppTheme {
+        NewsScreen(
+            topHeadLinesUiState = TopHeadLinesUiState.Error,
+            onNewsClick = {},
+            onNavigationClick = {}
+        )
+    }
 }
