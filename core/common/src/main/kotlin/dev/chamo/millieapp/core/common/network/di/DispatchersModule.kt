@@ -1,4 +1,4 @@
-package dev.chamo.mycletest.core.common.network.di
+package dev.chamo.millieapp.core.common.network.di
 
 import dagger.Module
 import dagger.Provides

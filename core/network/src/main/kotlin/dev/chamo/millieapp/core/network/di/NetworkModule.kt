@@ -4,9 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.chamo.millieapp.core.network.BuildConfig
 import dev.chamo.millieapp.core.network.MillieAppNetworkDataSource
 import dev.chamo.millieapp.core.network.retrofit.RetrofitMillieAppNetwork
-import dev.chamo.mycletest.core.network.BuildConfig
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.OkHttpClient

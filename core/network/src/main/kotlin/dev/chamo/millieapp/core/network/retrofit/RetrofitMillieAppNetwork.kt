@@ -1,9 +1,9 @@
 package dev.chamo.millieapp.core.network.retrofit
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dev.chamo.millieapp.core.network.BuildConfig
 import dev.chamo.millieapp.core.network.MillieAppNetworkDataSource
 import dev.chamo.millieapp.core.network.model.NetworkTopHeadlines
-import dev.chamo.mycletest.core.network.BuildConfig
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaType
@@ -25,7 +25,7 @@ class RetrofitMillieAppNetwork @Inject constructor(
             networkJson.asConverterFactory("application/json".toMediaType()),
         )
         .build()
-        .create(RetrofitMilleAppNetworkApi::class.java)
+        .create(RetrofitMillieAppNetworkApi::class.java)
 
     override suspend fun getTopHeadlines(): NetworkTopHeadlines {
         return networkApi.getTopHeadlines(

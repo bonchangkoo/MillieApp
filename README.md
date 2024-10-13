@@ -1,4 +1,4 @@
-## Types of modules in MilleApp
+## Types of modules in MillieApp
 
 ```mermaid
 %%{

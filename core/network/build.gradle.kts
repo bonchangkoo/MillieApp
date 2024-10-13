@@ -9,7 +9,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    namespace = "dev.chamo.mycletest.core.network"
+    namespace = "dev.chamo.millieapp.core.network"
 }
 
 secrets {

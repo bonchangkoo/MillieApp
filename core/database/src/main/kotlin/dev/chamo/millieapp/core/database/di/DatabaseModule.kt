@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun providesNiaDatabase(
+    fun providesMillieDatabase(
         @ApplicationContext context: Context,
     ): MillieAppDatabase = Room.databaseBuilder(
         context,
