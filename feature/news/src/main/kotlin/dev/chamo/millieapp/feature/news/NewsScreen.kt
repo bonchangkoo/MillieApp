@@ -103,8 +103,7 @@ internal fun NewsScreen(
                         modifier = Modifier
                             .fillMaxSize(),
                         columns = GridCells.Fixed(columns),
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         state = scrollableState
                     ) {
@@ -132,6 +131,8 @@ internal fun TopHeadLineItem(
                 onNewsClick(topHeadLine.url)
             })
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
+
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
