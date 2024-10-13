@@ -8,9 +8,10 @@ import dev.chamo.millieapp.core.model.TopHeadline
     tableName = "top_headlines",
 )
 data class TopHeadlineEntity (
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val sourceName: String,
     val author: String,
-    @PrimaryKey
     val title: String,
     val description: String,
     val url: String,
@@ -31,3 +32,13 @@ fun TopHeadlineEntity.asExternalModel() = TopHeadline(
     content = content,
     isSelected = isSelected
 )
+
+fun List<TopHeadlineEntity>.asExternalModel(
+    selectedTitles: List<String> = emptyList()
+): List<TopHeadline>{
+    return map {
+        it.copy(
+          isSelected = selectedTitles.contains(it.title)
+        ).asExternalModel()
+    }
+}

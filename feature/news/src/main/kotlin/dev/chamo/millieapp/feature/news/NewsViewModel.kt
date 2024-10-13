@@ -1,5 +1,6 @@
 package dev.chamo.millieapp.feature.news
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -69,13 +70,21 @@ class NewsViewModel @Inject constructor(
         if (currentState is TopHeadLinesUiState.Success) {
             val newTopHeadlines = currentState.topHeadlines.map { topHeadLine ->
                 if (topHeadLine.url == url) {
-                    topHeadLine.copy(isSelected = true)
+                    topHeadLine.copy(isSelected = true).also {
+                        upsertTopHeadLine(it)
+                    }
                 } else {
                     topHeadLine
                 }
             }
 
             _topHeadLinesUiState.value = currentState.copy(topHeadlines = newTopHeadlines)
+        }
+    }
+
+    private fun upsertTopHeadLine(topHeadline: TopHeadline) {
+        viewModelScope.launch {
+            newsRepository.upsertTopHeadLine(topHeadline)
         }
     }
 }

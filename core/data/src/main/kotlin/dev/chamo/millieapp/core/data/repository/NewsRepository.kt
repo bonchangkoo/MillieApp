@@ -1,5 +1,6 @@
 package dev.chamo.millieapp.core.data.repository
 
+import android.util.Log
 import dev.chamo.millieapp.core.common.network.Dispatcher
 import dev.chamo.millieapp.core.common.network.MillieAppDispatchers
 import dev.chamo.millieapp.core.data.model.asEntity
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 interface NewsRepository {
     fun getTopHeadlines(isOffline: Boolean = false): Flow<List<TopHeadline>>
+    suspend fun upsertTopHeadLine(topHeadline: TopHeadline)
 }
 
 class NewsRepositoryImpl @Inject constructor(
@@ -28,27 +30,41 @@ class NewsRepositoryImpl @Inject constructor(
 
     override fun getTopHeadlines(isOffline: Boolean): Flow<List<TopHeadline>> {
         return flow {
+            val topHeadlineEntityList = topHeadlineDao.getTopHeadlineEntities()
+            val selectedTitles = topHeadlineEntityList.filter {
+                it.isSelected
+            }.map {
+                it.title
+            }
+
             if (isOffline) {
-                val headlineEntities = topHeadlineDao.getTopHeadlineEntities()
-                val topHeadLines = headlineEntities.map { entities ->
-                    entities.asExternalModel()
-                }
+                val topHeadLines = topHeadlineEntityList.asExternalModel(
+                    selectedTitles = selectedTitles
+                )
                 emit(topHeadLines)
 
             } else {
                 val networkTopHeadlines = millieAppNetworkDataSource.getTopHeadlines()
-                val topHeadLines = networkTopHeadlines.asExternalModel()
+
+                val topHeadLines = networkTopHeadlines.asExternalModel(
+                    selectedTitles = selectedTitles
+                )
                 emit(topHeadLines)
 
-                val headlineEntities = networkTopHeadlines.asEntity()
-                insertTopHeadlines(headlineEntities)
+                val topHeadlineEntities = networkTopHeadlines.asEntity()
+                insertTopHeadlines(topHeadlineEntities)
             }
         }.flowOn(ioDispatcher)
     }
 
-    private suspend fun insertTopHeadlines(headlineEntities: List<TopHeadlineEntity>) {
-        topHeadlineDao.insertOrReplaceTopHeadlines(
-            headlineEntities = headlineEntities
+    override suspend fun upsertTopHeadLine(topHeadline: TopHeadline) {
+        val topHeadlineEntity = topHeadline.asEntity()
+        topHeadlineDao.upsertTopHeadline(topHeadlineEntity)
+    }
+
+    private suspend fun insertTopHeadlines(topHeadlineEntities: List<TopHeadlineEntity>) {
+       topHeadlineDao.insertOrReplaceTopHeadlines(
+            topHeadlineEntities = topHeadlineEntities
         )
     }
 }

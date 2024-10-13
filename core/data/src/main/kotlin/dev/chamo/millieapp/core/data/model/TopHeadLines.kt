@@ -1,5 +1,6 @@
 package dev.chamo.millieapp.core.data.model
 
+import android.util.Log
 import dev.chamo.millieapp.core.database.model.TopHeadlineEntity
 import dev.chamo.millieapp.core.model.TopHeadline
 import dev.chamo.millieapp.core.network.model.NetworkTopHeadlines
@@ -9,7 +10,9 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
-fun NetworkTopHeadlines?.asExternalModel(): List<TopHeadline> {
+fun NetworkTopHeadlines?.asExternalModel(
+    selectedTitles: List<String> = emptyList()
+): List<TopHeadline> {
     return this?.articles?.filterNot {
         it.title == "[Removed]"
     }?.map {
@@ -21,7 +24,8 @@ fun NetworkTopHeadlines?.asExternalModel(): List<TopHeadline> {
             url = it.url,
             urlToImage = it.urlToImage ?: "",
             publishedAt = it.publishedAt.calculatePublishedAt(),
-            content = it.content ?: ""
+            content = it.content ?: "",
+            isSelected = selectedTitles.contains(it.title)
         )
     } ?: emptyList()
 }
@@ -42,6 +46,20 @@ fun NetworkTopHeadlines?.asEntity(): List<TopHeadlineEntity> {
             isSelected = false
         )
     } ?: emptyList()
+}
+
+fun TopHeadline.asEntity(): TopHeadlineEntity {
+    return TopHeadlineEntity(
+        sourceName = sourceName,
+        author = author,
+        title = title,
+        description = description,
+        url = url,
+        urlToImage = urlToImage,
+        publishedAt = publishedAt,
+        content = content,
+        isSelected = isSelected
+    )
 }
 
 fun String.calculatePublishedAt(): String {

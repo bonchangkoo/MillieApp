@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Upsert
 import dev.chamo.millieapp.core.database.model.TopHeadlineEntity
 
 @Dao
@@ -12,5 +13,8 @@ interface TopHeadlineDao {
     suspend fun getTopHeadlineEntities(): List<TopHeadlineEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrReplaceTopHeadlines(headlineEntities: List<TopHeadlineEntity>): List<Long>
+    suspend fun insertOrReplaceTopHeadlines(topHeadlineEntities: List<TopHeadlineEntity>): List<Long>
+
+    @Upsert
+    suspend fun upsertTopHeadline(topHeadline: TopHeadlineEntity): Long
 }
