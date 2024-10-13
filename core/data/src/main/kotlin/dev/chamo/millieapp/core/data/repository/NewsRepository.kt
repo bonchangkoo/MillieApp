@@ -1,6 +1,5 @@
 package dev.chamo.millieapp.core.data.repository
 
-import android.util.Log
 import dev.chamo.millieapp.core.common.network.Dispatcher
 import dev.chamo.millieapp.core.common.network.MillieAppDispatchers
 import dev.chamo.millieapp.core.data.model.asEntity

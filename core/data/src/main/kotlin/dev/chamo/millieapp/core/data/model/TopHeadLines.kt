@@ -1,6 +1,5 @@
 package dev.chamo.millieapp.core.data.model
 
-import android.util.Log
 import dev.chamo.millieapp.core.database.model.TopHeadlineEntity
 import dev.chamo.millieapp.core.model.TopHeadline
 import dev.chamo.millieapp.core.network.model.NetworkTopHeadlines
